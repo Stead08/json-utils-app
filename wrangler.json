@@ -2,6 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "json-utils-app",
   "main": "./src/worker/index.ts",
+  "build": {
+    "command": "npm run build"
+  },
   "compatibility_date": "2025-10-08",
   "compatibility_flags": ["nodejs_compat"],
   "observability": {

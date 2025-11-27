@@ -1,65 +1,148 @@
-// src/App.tsx
-
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import cloudflareLogo from "./assets/Cloudflare_Logo.svg";
-import honoLogo from "./assets/hono.svg";
-import "./App.css";
+import { useDiff } from './presentation/hooks/useDiff';
+import { Button } from './presentation/components/atoms/Button';
+import { TextArea } from './presentation/components/atoms/TextArea';
+import './presentation/styles/global.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState("unknown");
+  const { state, actions } = useDiff();
+
+  const handleCompare = () => {
+    actions.compare();
+  };
+
+  const styles = {
+    container: {
+      minHeight: '100vh',
+      padding: 'var(--spacing-xl)',
+      backgroundColor: 'var(--bg-primary)',
+    },
+    header: {
+      marginBottom: 'var(--spacing-xl)',
+      textAlign: 'center' as const,
+    },
+    title: {
+      fontSize: 'var(--font-xxl)',
+      fontWeight: 700,
+      color: 'var(--fg-primary)',
+      marginBottom: 'var(--spacing-sm)',
+    },
+    subtitle: {
+      fontSize: 'var(--font-md)',
+      color: 'var(--fg-secondary)',
+    },
+    inputContainer: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: 'var(--spacing-lg)',
+      marginBottom: 'var(--spacing-lg)',
+    },
+    buttonContainer: {
+      display: 'flex',
+      gap: 'var(--spacing-md)',
+      justifyContent: 'center',
+      marginBottom: 'var(--spacing-xl)',
+    },
+    results: {
+      padding: 'var(--spacing-lg)',
+      backgroundColor: 'var(--bg-secondary)',
+      borderRadius: 'var(--radius-lg)',
+      marginTop: 'var(--spacing-lg)',
+    },
+    error: {
+      padding: 'var(--spacing-md)',
+      backgroundColor: 'var(--accent-red)',
+      color: 'var(--fg-primary)',
+      borderRadius: 'var(--radius-md)',
+      marginBottom: 'var(--spacing-lg)',
+    },
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-        <a href="https://hono.dev/" target="_blank">
-          <img src={honoLogo} className="logo cloudflare" alt="Hono logo" />
-        </a>
-        <a href="https://workers.cloudflare.com/" target="_blank">
-          <img
-            src={cloudflareLogo}
-            className="logo cloudflare"
-            alt="Cloudflare logo"
-          />
-        </a>
+    <div style={styles.container}>
+      <header style={styles.header}>
+        <h1 style={styles.title}>JSON Diff Tool</h1>
+        <p style={styles.subtitle}>Compare JSON documents with semantic analysis</p>
+      </header>
+
+      {state.error && (
+        <div style={styles.error}>
+          <strong>Error:</strong>{' '}
+          {state.error.type === 'LEFT_PARSE_ERROR'
+            ? `Left JSON: ${state.error.error.getMessage()}`
+            : state.error.type === 'RIGHT_PARSE_ERROR'
+            ? `Right JSON: ${state.error.error.getMessage()}`
+            : state.error.message}
+        </div>
+      )}
+
+      <div style={styles.inputContainer}>
+        <TextArea
+          label="Left JSON"
+          placeholder="Paste your first JSON here..."
+          value={state.leftInput}
+          onChange={(e) => actions.setLeftInput(e.target.value)}
+        />
+        <TextArea
+          label="Right JSON"
+          placeholder="Paste your second JSON here..."
+          value={state.rightInput}
+          onChange={(e) => actions.setRightInput(e.target.value)}
+        />
       </div>
-      <h1>Vite + React + Hono + Cloudflare</h1>
-      <div className="card">
-        <button
-          onClick={() => setCount((count) => count + 1)}
-          aria-label="increment"
+
+      <div style={styles.buttonContainer}>
+        <Button
+          variant="primary"
+          size="lg"
+          onClick={handleCompare}
+          disabled={state.isComparing || !state.leftInput || !state.rightInput}
         >
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <div className="card">
-        <button
-          onClick={() => {
-            fetch("/api/")
-              .then((res) => res.json() as Promise<{ name: string }>)
-              .then((data) => setName(data.name));
-          }}
-          aria-label="get name"
+          {state.isComparing ? 'Comparing...' : 'Compare'}
+        </Button>
+        <Button
+          variant="secondary"
+          size="lg"
+          onClick={actions.clear}
+          disabled={!state.leftInput && !state.rightInput}
         >
-          Name from API is: {name}
-        </button>
-        <p>
-          Edit <code>worker/index.ts</code> to change the name
-        </p>
+          Clear
+        </Button>
       </div>
-      <p className="read-the-docs">Click on the logos to learn more</p>
-    </>
+
+      {state.diffResult && (
+        <div style={styles.results}>
+          <h2 style={{ marginBottom: 'var(--spacing-md)', color: 'var(--fg-primary)' }}>
+            Comparison Results
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--spacing-md)' }}>
+            <div>
+              <div style={{ fontSize: 'var(--font-xs)', color: 'var(--fg-secondary)' }}>Added</div>
+              <div style={{ fontSize: 'var(--font-xl)', color: 'var(--diff-added)', fontWeight: 700 }}>
+                {state.diffResult.getStats().added}
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: 'var(--font-xs)', color: 'var(--fg-secondary)' }}>Removed</div>
+              <div style={{ fontSize: 'var(--font-xl)', color: 'var(--diff-removed)', fontWeight: 700 }}>
+                {state.diffResult.getStats().removed}
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: 'var(--font-xs)', color: 'var(--fg-secondary)' }}>Modified</div>
+              <div style={{ fontSize: 'var(--font-xl)', color: 'var(--diff-modified)', fontWeight: 700 }}>
+                {state.diffResult.getStats().modified}
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: 'var(--font-xs)', color: 'var(--fg-secondary)' }}>Total</div>
+              <div style={{ fontSize: 'var(--font-xl)', color: 'var(--fg-primary)', fontWeight: 700 }}>
+                {state.diffResult.getStats().total}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 

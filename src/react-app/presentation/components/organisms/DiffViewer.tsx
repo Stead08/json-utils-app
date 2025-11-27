@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import type { DiffResult } from '../../../domain/entities/DiffResult';
+import type { JsonDocument } from '../../../domain/entities/JsonDocument';
 import type { ViewMode, ExportFormat } from '../../../domain/types/diff';
 import { DiffLine } from '../molecules/DiffLine';
+import { JsonStructureViewer } from '../molecules/JsonStructureViewer';
 import { Button } from '../atoms/Button';
 import { ExportAdapter } from '../../../infrastructure/adapters/ExportAdapter';
 import { createExportDiffUseCase, createCopyDiffUseCase } from '../../../application/use-cases/exportDiff';
 
 export interface DiffViewerProps {
   readonly diffResult: DiffResult;
+  readonly leftDocument?: JsonDocument | null;
+  readonly rightDocument?: JsonDocument | null;
 }
 
-export const DiffViewer = ({ diffResult }: DiffViewerProps) => {
+export const DiffViewer = ({ diffResult, leftDocument, rightDocument }: DiffViewerProps) => {
   const [viewMode, setViewMode] = useState<ViewMode>('unified');
   const [showUnchanged, setShowUnchanged] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
@@ -234,6 +238,12 @@ export const DiffViewer = ({ diffResult }: DiffViewerProps) => {
           <div style={styles.noChanges}>
             {showUnchanged ? 'No entries to display' : 'No changes detected'}
           </div>
+        ) : viewMode === 'inline' && leftDocument && rightDocument ? (
+          <JsonStructureViewer
+            leftData={leftDocument.getData()}
+            rightData={rightDocument.getData()}
+            diffEntries={visibleEntries}
+          />
         ) : (
           visibleEntries.map((entry, index) => (
             <DiffLine key={index} entry={entry} viewMode={viewMode} />

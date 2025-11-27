@@ -28,9 +28,24 @@ export const useDiff = (initialSettings?: CompareSettings) => {
   const compare = useCallback(() => {
     dispatch({ type: 'COMPARE_START' });
 
+    // Auto-format both inputs before comparing
+    const leftFormatResult = formatJson(state.leftInput, state.settings.formatSettings);
+    const rightFormatResult = formatJson(state.rightInput, state.settings.formatSettings);
+
+    const leftJson = leftFormatResult.ok ? leftFormatResult.value : state.leftInput;
+    const rightJson = rightFormatResult.ok ? rightFormatResult.value : state.rightInput;
+
+    // Update inputs with formatted versions if successful
+    if (leftFormatResult.ok) {
+      dispatch({ type: 'SET_LEFT_INPUT', payload: leftJson });
+    }
+    if (rightFormatResult.ok) {
+      dispatch({ type: 'SET_RIGHT_INPUT', payload: rightJson });
+    }
+
     const result = compareJson({
-      leftJson: state.leftInput,
-      rightJson: state.rightInput,
+      leftJson,
+      rightJson,
       settings: state.settings,
     });
 

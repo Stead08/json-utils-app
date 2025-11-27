@@ -15,7 +15,8 @@
   "kv_namespaces": [
     {
       "binding": "JSON_DIFF_KV",
-      "id": "preview_id"
+      "id": "09712c768e7c4212a6a26b5ddba67f07",
+      "preview_id": "4603e8b919244e818f097a4582c5b7be"
     }
   ]
 }

@@ -7,6 +7,7 @@
   --bg-tertiary: #44475a;
   --fg-primary: #f8f8f2;
   --fg-secondary: #6272a4;
+  --fg-tertiary: #44475a;
   --accent-cyan: #8be9fd;
   --accent-green: #50fa7b;
   --accent-red: #ff5555;
@@ -14,6 +15,9 @@
   --accent-yellow: #f1fa8c;
   --accent-pink: #ff79c6;
   --accent-purple: #bd93f9;
+
+  /* Border */
+  --border-color: #44475a;
 
   /* Diff colors */
   --diff-added: #50fa7b;

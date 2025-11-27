@@ -1,10 +1,12 @@
 import { useDiff } from './presentation/hooks/useDiff';
 import { Button } from './presentation/components/atoms/Button';
 import { TextArea } from './presentation/components/atoms/TextArea';
+import { DiffViewer } from './presentation/components/organisms/DiffViewer';
+import { SettingsPanel } from './presentation/components/organisms/SettingsPanel';
 import './presentation/styles/global.css';
 
 function App() {
-  const { state, actions } = useDiff();
+  const { state, actions, settings, setSettings } = useDiff();
 
   const handleCompare = () => {
     actions.compare();
@@ -42,12 +44,6 @@ function App() {
       justifyContent: 'center',
       marginBottom: 'var(--spacing-xl)',
     },
-    results: {
-      padding: 'var(--spacing-lg)',
-      backgroundColor: 'var(--bg-secondary)',
-      borderRadius: 'var(--radius-lg)',
-      marginTop: 'var(--spacing-lg)',
-    },
     error: {
       padding: 'var(--spacing-md)',
       backgroundColor: 'var(--accent-red)',
@@ -74,6 +70,8 @@ function App() {
             : state.error.message}
         </div>
       )}
+
+      <SettingsPanel settings={settings} onChange={setSettings} />
 
       <div style={styles.inputContainer}>
         <TextArea
@@ -109,39 +107,7 @@ function App() {
         </Button>
       </div>
 
-      {state.diffResult && (
-        <div style={styles.results}>
-          <h2 style={{ marginBottom: 'var(--spacing-md)', color: 'var(--fg-primary)' }}>
-            Comparison Results
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--spacing-md)' }}>
-            <div>
-              <div style={{ fontSize: 'var(--font-xs)', color: 'var(--fg-secondary)' }}>Added</div>
-              <div style={{ fontSize: 'var(--font-xl)', color: 'var(--diff-added)', fontWeight: 700 }}>
-                {state.diffResult.getStats().added}
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: 'var(--font-xs)', color: 'var(--fg-secondary)' }}>Removed</div>
-              <div style={{ fontSize: 'var(--font-xl)', color: 'var(--diff-removed)', fontWeight: 700 }}>
-                {state.diffResult.getStats().removed}
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: 'var(--font-xs)', color: 'var(--fg-secondary)' }}>Modified</div>
-              <div style={{ fontSize: 'var(--font-xl)', color: 'var(--diff-modified)', fontWeight: 700 }}>
-                {state.diffResult.getStats().modified}
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: 'var(--font-xs)', color: 'var(--fg-secondary)' }}>Total</div>
-              <div style={{ fontSize: 'var(--font-xl)', color: 'var(--fg-primary)', fontWeight: 700 }}>
-                {state.diffResult.getStats().total}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {state.diffResult && <DiffViewer diffResult={state.diffResult} />}
     </div>
   );
 }

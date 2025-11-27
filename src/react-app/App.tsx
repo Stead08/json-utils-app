@@ -38,6 +38,16 @@ function App() {
       gap: 'var(--spacing-lg)',
       marginBottom: 'var(--spacing-lg)',
     },
+    inputWrapper: {
+      display: 'flex',
+      flexDirection: 'column' as const,
+      gap: 'var(--spacing-sm)',
+    },
+    formatButtonContainer: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+      gap: 'var(--spacing-sm)',
+    },
     buttonContainer: {
       display: 'flex',
       gap: 'var(--spacing-md)',
@@ -74,18 +84,42 @@ function App() {
       <SettingsPanel settings={settings} onChange={setSettings} />
 
       <div style={styles.inputContainer}>
-        <TextArea
-          label="Left JSON"
-          placeholder="Paste your first JSON here..."
-          value={state.leftInput}
-          onChange={(e) => actions.setLeftInput(e.target.value)}
-        />
-        <TextArea
-          label="Right JSON"
-          placeholder="Paste your second JSON here..."
-          value={state.rightInput}
-          onChange={(e) => actions.setRightInput(e.target.value)}
-        />
+        <div style={styles.inputWrapper}>
+          <TextArea
+            label="Left JSON"
+            placeholder="Paste your first JSON here..."
+            value={state.leftInput}
+            onChange={(e) => actions.setLeftInput(e.target.value)}
+          />
+          <div style={styles.formatButtonContainer}>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={actions.formatLeftInput}
+              disabled={!state.leftInput}
+            >
+              ✨ Format
+            </Button>
+          </div>
+        </div>
+        <div style={styles.inputWrapper}>
+          <TextArea
+            label="Right JSON"
+            placeholder="Paste your second JSON here..."
+            value={state.rightInput}
+            onChange={(e) => actions.setRightInput(e.target.value)}
+          />
+          <div style={styles.formatButtonContainer}>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={actions.formatRightInput}
+              disabled={!state.rightInput}
+            >
+              ✨ Format
+            </Button>
+          </div>
+        </div>
       </div>
 
       <div style={styles.buttonContainer}>

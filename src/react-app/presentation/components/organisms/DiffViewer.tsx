@@ -28,7 +28,11 @@ export const DiffViewer = ({ diffResult }: DiffViewerProps) => {
       });
 
       if (!result.ok) {
-        alert(`Export failed: ${result.error.message}`);
+        const message =
+          result.error.type === 'unsupported-format'
+            ? `Unsupported format: ${result.error.format}`
+            : result.error.message;
+        alert(`Export failed: ${message}`);
       }
     } finally {
       setIsExporting(false);
@@ -40,7 +44,11 @@ export const DiffViewer = ({ diffResult }: DiffViewerProps) => {
     if (result.ok) {
       alert('Copied to clipboard!');
     } else {
-      alert(`Copy failed: ${result.error.message}`);
+      const message =
+        result.error.type === 'unsupported-format'
+          ? `Unsupported format: ${result.error.format}`
+          : result.error.message;
+      alert(`Copy failed: ${message}`);
     }
   };
 

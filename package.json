@@ -41,7 +41,10 @@
     "deploy": "wrangler deploy",
     "dev": "vite",
     "lint": "eslint .",
-    "preview": "npm run build && vite preview"
+    "preview": "npm run build && vite preview",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
   },
   "engines": {
     "node": "22.21.1",

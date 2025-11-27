@@ -47,6 +47,22 @@ export interface DiffResult {
 }
 
 /**
+ * Format settings for JSON formatting
+ */
+export interface FormatSettings {
+  readonly indent: 2 | 4 | '\t';
+  readonly sortKeys: boolean;
+}
+
+/**
+ * Default format settings
+ */
+export const DEFAULT_FORMAT_SETTINGS: FormatSettings = {
+  indent: 2,
+  sortKeys: false,
+};
+
+/**
  * Settings for JSON comparison
  */
 export interface CompareSettings {
@@ -54,6 +70,8 @@ export interface CompareSettings {
   readonly keyField?: string;
   readonly floatTolerance?: number;
   readonly treatNullAsUndefined: boolean;
+  readonly formatBeforeCompare: boolean;
+  readonly formatSettings: FormatSettings;
 }
 
 /**
@@ -62,6 +80,8 @@ export interface CompareSettings {
 export const DEFAULT_COMPARE_SETTINGS: CompareSettings = {
   ignoreArrayOrder: false,
   treatNullAsUndefined: false,
+  formatBeforeCompare: false,
+  formatSettings: DEFAULT_FORMAT_SETTINGS,
 };
 
 /**

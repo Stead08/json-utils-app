@@ -162,6 +162,97 @@ export const SettingsPanel = ({ settings, onChange }: SettingsPanelProps) => {
           </div>
         </div>
       </div>
+
+      <div style={{ ...styles.header, marginTop: 'var(--spacing-lg)' }}>
+        <span>✨</span>
+        <span>Format Before Compare</span>
+      </div>
+
+      <div style={styles.grid}>
+        <div style={styles.field}>
+          <div style={styles.checkboxContainer}>
+            <input
+              type="checkbox"
+              id="formatBeforeCompare"
+              checked={settings.formatBeforeCompare}
+              onChange={(e) =>
+                onChange({ ...settings, formatBeforeCompare: e.target.checked })
+              }
+              style={styles.checkbox}
+            />
+            <label htmlFor="formatBeforeCompare" style={styles.label}>
+              Format before comparing
+            </label>
+          </div>
+          <div style={styles.description}>
+            Automatically format JSON inputs before comparison
+          </div>
+        </div>
+
+        {settings.formatBeforeCompare && (
+          <>
+            <div style={styles.field}>
+              <label htmlFor="indent" style={styles.label}>
+                Indent
+              </label>
+              <select
+                id="indent"
+                value={
+                  settings.formatSettings.indent === '\t'
+                    ? 'tab'
+                    : settings.formatSettings.indent
+                }
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const indent =
+                    value === 'tab' ? '\t' : (parseInt(value) as 2 | 4);
+                  onChange({
+                    ...settings,
+                    formatSettings: {
+                      ...settings.formatSettings,
+                      indent,
+                    },
+                  });
+                }}
+                style={styles.input}
+              >
+                <option value={2}>2 spaces</option>
+                <option value={4}>4 spaces</option>
+                <option value="tab">Tab</option>
+              </select>
+              <div style={styles.description}>
+                Indentation size for formatted JSON
+              </div>
+            </div>
+
+            <div style={styles.field}>
+              <div style={styles.checkboxContainer}>
+                <input
+                  type="checkbox"
+                  id="sortKeys"
+                  checked={settings.formatSettings.sortKeys}
+                  onChange={(e) =>
+                    onChange({
+                      ...settings,
+                      formatSettings: {
+                        ...settings.formatSettings,
+                        sortKeys: e.target.checked,
+                      },
+                    })
+                  }
+                  style={styles.checkbox}
+                />
+                <label htmlFor="sortKeys" style={styles.label}>
+                  Sort object keys alphabetically
+                </label>
+              </div>
+              <div style={styles.description}>
+                Sort all object keys in alphabetical order
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

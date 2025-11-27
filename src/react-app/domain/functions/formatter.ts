@@ -1,5 +1,8 @@
-import type { DiffEntry, DiffResult, ExportFormat } from '../types/diff';
+import type { DiffEntry, DiffResult, ExportFormat, FormatSettings } from '../types/diff';
 import type { JsonValue } from '../types/json';
+import type { Result } from '../types/result';
+import { ok, err } from '../types/result';
+import { ValidationError } from '../value-objects/ValidationError';
 
 /**
  * Formats diff entries for export
@@ -246,4 +249,61 @@ const escapeHtml = (text: string): string => {
     "'": '&#039;',
   };
   return text.replace(/[&<>"']/g, char => map[char]);
+};
+
+/**
+ * Formats JSON string with specified settings
+ *
+ * @param input - JSON string to format
+ * @param settings - Format settings
+ * @returns Formatted JSON string or error
+ */
+export const formatJson = (
+  input: string,
+  settings: FormatSettings
+): Result<string, ValidationError> => {
+  try {
+    // 1. Parse JSON
+    const parsed = JSON.parse(input);
+
+    // 2. Sort keys if requested
+    const sorted = settings.sortKeys ? sortObjectKeys(parsed) : parsed;
+
+    // 3. Format with specified indent
+    const space = settings.indent === '\t' ? '\t' : settings.indent;
+    const formatted = JSON.stringify(sorted, null, space);
+
+    return ok(formatted);
+  } catch (error) {
+    return err(
+      ValidationError.parse(
+        error instanceof Error ? error.message : 'Unknown parse error'
+      )
+    );
+  }
+};
+
+/**
+ * Recursively sorts object keys in alphabetical order
+ *
+ * @param value - Value to sort (recursively processes objects and arrays)
+ * @returns Value with sorted keys
+ */
+const sortObjectKeys = (value: unknown): unknown => {
+  if (value === null || typeof value !== 'object') {
+    return value;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map(sortObjectKeys);
+  }
+
+  const sorted: Record<string, unknown> = {};
+  const keys = Object.keys(value).sort();
+
+  for (const key of keys) {
+    sorted[key] = sortObjectKeys((value as Record<string, unknown>)[key]);
+  }
+
+  return sorted;
 };

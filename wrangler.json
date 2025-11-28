@@ -1,22 +1,22 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "json-utils-app",
-  "main": "./src/worker/index.ts",
-  "compatibility_date": "2025-10-08",
-  "compatibility_flags": ["nodejs_compat"],
-  "observability": {
-    "enabled": true
-  },
-  "upload_source_maps": true,
-  "assets": {
-    "directory": "./dist/client",
-    "not_found_handling": "single-page-application"
-  },
-  "kv_namespaces": [
-    {
-      "binding": "JSON_DIFF_KV",
-      "id": "09712c768e7c4212a6a26b5ddba67f07",
-      "preview_id": "4603e8b919244e818f097a4582c5b7be"
-    }
-  ]
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "json-utils-app",
+	"main": "./src/worker/index.ts",
+	"compatibility_date": "2025-10-08",
+	"compatibility_flags": ["nodejs_compat"],
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"assets": {
+		"directory": "./dist/client",
+		"not_found_handling": "single-page-application"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "JSON_DIFF_KV",
+			"id": "09712c768e7c4212a6a26b5ddba67f07",
+			"preview_id": "4603e8b919244e818f097a4582c5b7be"
+		}
+	]
 }

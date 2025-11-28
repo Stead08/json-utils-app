@@ -2,12 +2,12 @@
  * Represents any valid JSON value
  */
 export type JsonValue =
-  | null
-  | boolean
-  | number
-  | string
-  | JsonArray
-  | JsonObject;
+	| null
+	| boolean
+	| number
+	| string
+	| JsonArray
+	| JsonObject;
 
 /**
  * Represents a JSON array
@@ -28,19 +28,19 @@ export type JsonPrimitive = null | boolean | number | string;
  * Type guard to check if a value is a JSON object
  */
 export const isJsonObject = (value: JsonValue): value is JsonObject => {
-  return value !== null && typeof value === 'object' && !Array.isArray(value);
+	return value !== null && typeof value === "object" && !Array.isArray(value);
 };
 
 /**
  * Type guard to check if a value is a JSON array
  */
 export const isJsonArray = (value: JsonValue): value is JsonArray => {
-  return Array.isArray(value);
+	return Array.isArray(value);
 };
 
 /**
  * Type guard to check if a value is a JSON primitive
  */
 export const isJsonPrimitive = (value: JsonValue): value is JsonPrimitive => {
-  return value === null || typeof value !== 'object';
+	return value === null || typeof value !== "object";
 };

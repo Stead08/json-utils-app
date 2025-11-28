@@ -37,8 +37,8 @@ importers:
         specifier: 19.0.4
         version: 19.0.4(@types/react@19.0.10)
       '@vitejs/plugin-react':
-        specifier: 5.0.0
-        version: 5.0.0(vite@6.4.1(@types/node@24.0.4))
+        specifier: 5.1.1
+        version: 5.1.1(vite@6.4.1(@types/node@24.0.4))
       eslint:
         specifier: 9.27.0
         version: 9.27.0
@@ -772,8 +772,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@rolldown/pluginutils@1.0.0-beta.30':
-    resolution: {integrity: sha512-whXaSoNUFiyDAjkUF8OBpOm77Szdbk5lGNqFe6CbVbJFrhCCPinCbRA3NjawwlNHla1No7xvXXh+CpSxnPfUEw==}
+  '@rolldown/pluginutils@1.0.0-beta.47':
+    resolution: {integrity: sha512-8QagwMH3kNCuzD8EWL8R2YPW5e4OrHNSAHRFDdmFqEwEaD/KcNKjVoumo+gP2vW5eKB2UPbM6vTYiGZX0ixLnw==}
 
   '@rollup/plugin-replace@6.0.3':
     resolution: {integrity: sha512-J4RZarRvQAm5IF0/LwUUg+obsm+xZhYnbMXmXROyoSE1ATJe3oXSb9L5MMppdxP2ylNSjv6zFBwKYjcKMucVfA==}
@@ -1000,8 +1000,8 @@ packages:
     resolution: {integrity: sha512-zTh2+1Y8ZpmeQaQVIc/ZZxsx8UzgKJyNg1PTvjzC7WMhPSVS8bfDX34k1SrwOf016qd5RU3az2UxUNue3IfQ5g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@vitejs/plugin-react@5.0.0':
-    resolution: {integrity: sha512-Jx9JfsTa05bYkS9xo0hkofp2dCmp1blrKjw9JONs5BTHOvJCgLbaPSuZLGSVJW6u2qe0tc4eevY0+gSNNi0YCw==}
+  '@vitejs/plugin-react@5.1.1':
+    resolution: {integrity: sha512-WQfkSw0QbQ5aJ2CHYw23ZGkqnRwqKHD/KYsMeTkZzPT4Jcf0DcBxBtwMJxnu6E7oxw5+JC6ZAiePgh28uJ1HBA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
@@ -1541,8 +1541,8 @@ packages:
     peerDependencies:
       react: ^19.0.0
 
-  react-refresh@0.17.0:
-    resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
+  react-refresh@0.18.0:
+    resolution: {integrity: sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==}
     engines: {node: '>=0.10.0'}
 
   react@19.0.0:
@@ -2348,7 +2348,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
-  '@rolldown/pluginutils@1.0.0-beta.30': {}
+  '@rolldown/pluginutils@1.0.0-beta.47': {}
 
   '@rollup/plugin-replace@6.0.3(rollup@4.53.3)':
     dependencies:
@@ -2569,14 +2569,14 @@ snapshots:
       '@typescript-eslint/types': 8.35.0
       eslint-visitor-keys: 4.2.1
 
-  '@vitejs/plugin-react@5.0.0(vite@6.4.1(@types/node@24.0.4))':
+  '@vitejs/plugin-react@5.1.1(vite@6.4.1(@types/node@24.0.4))':
     dependencies:
       '@babel/core': 7.28.5
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.5)
       '@babel/plugin-transform-react-jsx-source': 7.27.1(@babel/core@7.28.5)
-      '@rolldown/pluginutils': 1.0.0-beta.30
+      '@rolldown/pluginutils': 1.0.0-beta.47
       '@types/babel__core': 7.20.5
-      react-refresh: 0.17.0
+      react-refresh: 0.18.0
       vite: 6.4.1(@types/node@24.0.4)
     transitivePeerDependencies:
       - supports-color
@@ -3120,7 +3120,7 @@ snapshots:
       react: 19.0.0
       scheduler: 0.25.0
 
-  react-refresh@0.17.0: {}
+  react-refresh@0.18.0: {}
 
   react@19.0.0: {}
 

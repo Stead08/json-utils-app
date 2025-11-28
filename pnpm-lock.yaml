@@ -23,7 +23,7 @@ importers:
         version: 2.3.8
       '@cloudflare/vite-plugin':
         specifier: 1.7.5
-        version: 1.7.5(rollup@4.53.3)(vite@6.4.1(@types/node@24.10.1))(workerd@1.20250617.0)(wrangler@4.21.2)
+        version: 1.7.5(rollup@4.53.3)(vite@7.2.4(@types/node@24.10.1))(workerd@1.20250617.0)(wrangler@4.21.2)
       '@eslint/js':
         specifier: 9.29.0
         version: 9.29.0
@@ -38,7 +38,7 @@ importers:
         version: 19.0.4(@types/react@19.0.10)
       '@vitejs/plugin-react':
         specifier: 5.1.1
-        version: 5.1.1(vite@6.4.1(@types/node@24.10.1))
+        version: 5.1.1(vite@7.2.4(@types/node@24.10.1))
       eslint:
         specifier: 9.27.0
         version: 9.27.0
@@ -58,8 +58,8 @@ importers:
         specifier: 8.35.0
         version: 8.35.0(eslint@9.27.0)(typescript@5.8.3)
       vite:
-        specifier: ^6.0.0
-        version: 6.4.1(@types/node@24.10.1)
+        specifier: ^7.0.0
+        version: 7.2.4(@types/node@24.10.1)
       vitest:
         specifier: ^4.0.14
         version: 4.0.14(@types/node@24.10.1)
@@ -1689,19 +1689,19 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
-  vite@6.4.1:
-    resolution: {integrity: sha512-+Oxm7q9hDoLMyJOYfUYBuHQo+dkAloi33apOPP56pzj+vsdJDzr+j1NISE5pyaAuKL4A3UD34qd0lx5+kfKp2g==}
-    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
+  vite@7.2.4:
+    resolution: {integrity: sha512-NL8jTlbo0Tn4dUEXEsUg8KeyG/Lkmc4Fnzb8JXN/Ykm9G4HNImjtABMJgkQoVjOBN/j2WAwDTRytdqJbZsah7w==}
+    engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
-      '@types/node': ^18.0.0 || ^20.0.0 || >=22.0.0
+      '@types/node': ^20.19.0 || >=22.12.0
       jiti: '>=1.21.0'
-      less: '*'
+      less: ^4.0.0
       lightningcss: ^1.21.0
-      sass: '*'
-      sass-embedded: '*'
-      stylus: '*'
-      sugarss: '*'
+      sass: ^1.70.0
+      sass-embedded: ^1.70.0
+      stylus: '>=0.54.8'
+      sugarss: ^5.0.0
       terser: ^5.16.0
       tsx: ^4.8.1
       yaml: ^2.4.2
@@ -1976,7 +1976,7 @@ snapshots:
     optionalDependencies:
       workerd: 1.20250617.0
 
-  '@cloudflare/vite-plugin@1.7.5(rollup@4.53.3)(vite@6.4.1(@types/node@24.10.1))(workerd@1.20250617.0)(wrangler@4.21.2)':
+  '@cloudflare/vite-plugin@1.7.5(rollup@4.53.3)(vite@7.2.4(@types/node@24.10.1))(workerd@1.20250617.0)(wrangler@4.21.2)':
     dependencies:
       '@cloudflare/unenv-preset': 2.3.3(unenv@2.0.0-rc.17)(workerd@1.20250617.0)
       '@mjackson/node-fetch-server': 0.6.1
@@ -1986,7 +1986,7 @@ snapshots:
       picocolors: 1.1.1
       tinyglobby: 0.2.15
       unenv: 2.0.0-rc.17
-      vite: 6.4.1(@types/node@24.10.1)
+      vite: 7.2.4(@types/node@24.10.1)
       wrangler: 4.21.2
       ws: 8.18.0
     transitivePeerDependencies:
@@ -2569,7 +2569,7 @@ snapshots:
       '@typescript-eslint/types': 8.35.0
       eslint-visitor-keys: 4.2.1
 
-  '@vitejs/plugin-react@5.1.1(vite@6.4.1(@types/node@24.10.1))':
+  '@vitejs/plugin-react@5.1.1(vite@7.2.4(@types/node@24.10.1))':
     dependencies:
       '@babel/core': 7.28.5
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.5)
@@ -2577,7 +2577,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.47
       '@types/babel__core': 7.20.5
       react-refresh: 0.18.0
-      vite: 6.4.1(@types/node@24.10.1)
+      vite: 7.2.4(@types/node@24.10.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -2590,13 +2590,13 @@ snapshots:
       chai: 6.2.1
       tinyrainbow: 3.0.3
 
-  '@vitest/mocker@4.0.14(vite@6.4.1(@types/node@24.10.1))':
+  '@vitest/mocker@4.0.14(vite@7.2.4(@types/node@24.10.1))':
     dependencies:
       '@vitest/spy': 4.0.14
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 6.4.1(@types/node@24.10.1)
+      vite: 7.2.4(@types/node@24.10.1)
 
   '@vitest/pretty-format@4.0.14':
     dependencies:
@@ -3289,7 +3289,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  vite@6.4.1(@types/node@24.10.1):
+  vite@7.2.4(@types/node@24.10.1):
     dependencies:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.3)
@@ -3304,7 +3304,7 @@ snapshots:
   vitest@4.0.14(@types/node@24.10.1):
     dependencies:
       '@vitest/expect': 4.0.14
-      '@vitest/mocker': 4.0.14(vite@6.4.1(@types/node@24.10.1))
+      '@vitest/mocker': 4.0.14(vite@7.2.4(@types/node@24.10.1))
       '@vitest/pretty-format': 4.0.14
       '@vitest/runner': 4.0.14
       '@vitest/snapshot': 4.0.14
@@ -3321,7 +3321,7 @@ snapshots:
       tinyexec: 0.3.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
-      vite: 6.4.1(@types/node@24.10.1)
+      vite: 7.2.4(@types/node@24.10.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.10.1

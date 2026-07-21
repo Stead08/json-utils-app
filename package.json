@@ -18,7 +18,7 @@
 		"react-dom": "19.2.7"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.5.4",
+		"@biomejs/biome": "2.5.5",
 		"@cloudflare/vite-plugin": "1.45.1",
 		"@eslint/js": "9.39.5",
 		"@types/node": "24.13.3",

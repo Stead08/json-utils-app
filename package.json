@@ -19,7 +19,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.6.9",
-		"@cloudflare/vite-plugin": "1.70.1",
+		"@cloudflare/vite-plugin": "1.70.2",
 		"@eslint/js": "9.39.5",
 		"@types/node": "24.19.4",
 		"@types/react": "19.3.3",
